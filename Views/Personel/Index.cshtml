@@ -1,0 +1,66 @@
+﻿@model List<Personel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Personel kayıt ekranı</h2>
+
+<a class="btn btn-primary" asp-action="Form">Yeni ekle</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Personel ID</th>
+            <th>Personel AdıSoyadı</th>
+            <th>Personel Giristarih</th>
+            <th>Personel Telefon</th>
+            <th>Personel Cinsiyet</th>
+            <th>Personel E-mail</th>
+            <th>Personel DepartmanAd</th>
+            <th>işlem</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Id</td>
+                <td>@item.AdSoyad</td>
+                <td>@item.Giristarih</td>
+                <td>@item.Telefon</td>
+                <td>@(item.Cinsiyet == false ? "erkek" : "kadın")</td>
+                <td>@item.Email</td>
+                <td>
+                    @item.Departman.Ad
+                    @*@foreach(var dep in ViewBag.departmanlistesi)
+                        {
+                            if (item.DepartmanId == dep.Id)
+                            {
+                                <span>@dep.Ad</span>
+                            }
+                        }*@
+
+
+
+
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Form" asp-route-Id="@item.Id">düzenle</a>
+                    <a class="btn btn-danger" asp-action="Sil" asp-route-Id="@item.Id" onclick="return onay()">sil</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        function onay() {
+            var r = confirm("Eminmisiniz");
+            return r;
+        }
+    </script>
+    }
+

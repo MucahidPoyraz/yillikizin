@@ -1,0 +1,17 @@
+﻿@model  Departman
+@{
+    ViewData["Title"] = "Form";
+}
+
+<form method="post" asp-action="Kaydet">
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="form-group">
+        <label>Departman adı</label>
+        <input type="text" asp-for="@Model.Ad" class="form-control"   placeholder="departman adını giriniz">
+        
+    </div>
+    
+    <button type="submit" class="btn btn-primary">ekle</button>
+</form>
+
+

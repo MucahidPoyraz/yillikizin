@@ -1,0 +1,33 @@
+﻿@model Personel
+@{
+    ViewData["Title"] = "Form";
+}
+
+<h2>Personel</h2>
+
+<form method="post" asp-action="Kaydet">
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="form-group">
+        <label>Personel AdıSoyadı</label>
+        <input type="text" asp-for="@Model.AdSoyad" class="form-control" required>
+        <label>Personel GirisTarihi</label>
+        <input type="date" asp-for="@Model.Giristarih" class="form-control" placeholder="">
+        <label>Personel Telefon</label>
+        <input type="tel" asp-for="@Model.Telefon" class="form-control" placeholder="">
+        <label>PErsonel Cinsiyet</label><br />
+        <input type="radio" asp-for="@Model.Cinsiyet" value=false checked> erkek<br>
+        <input type="radio" asp-for="@Model.Cinsiyet" value=true> Female<br>
+        <label>Personel E-mail</label>
+        <input type="email" asp-for="@Model.Email" class="form-control" placeholder="">
+        <label>Personel Departman ID</label>
+        <select asp-for="@Model.DepartmanId">
+            @foreach (var item in ViewBag.departmanlistesi)
+            {
+                <option value="@item.Id">@item.Ad</option>
+            }
+        </select>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">ekle</button>
+</form>

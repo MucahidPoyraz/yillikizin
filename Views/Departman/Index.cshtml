@@ -1,0 +1,43 @@
+﻿@model List<Departman>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Departmanlar</h2>
+<a class="btn btn-primary" asp-action="Form">Yeni ekle</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Deparman Adı</th>
+            <th>işlem</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model )
+        {
+        <tr>
+
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Form" asp-route-id="@item.Id">düzenle</a>
+                <a class="btn btn-danger" asp-action="Sil" asp-route-id="@item.Id" onclick="return onay()">sil</a>
+            </td>
+
+        </tr>
+
+        }
+
+    </tbody>
+</table>
+
+@section scripts{ 
+    <script>
+        function onay() {
+            var r = confirm("Eminmisiniz");
+            return r;
+        }
+    </script>
+}

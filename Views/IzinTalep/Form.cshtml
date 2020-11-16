@@ -1,0 +1,50 @@
+﻿@model Izin
+@{
+    ViewData["Title"] = "Form";
+}
+@if (@ViewBag.hatamesaji != null) {
+<div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Warning!</strong> @ViewBag.hatamesaji
+</div>
+}
+<h2>Talep oluşturma formu</h2>
+
+
+
+<form method="post" asp-action="Kaydet">
+    <input hidden asp-for="@Model.Id" />
+
+    <select asp-for="@Model.PersonelId">
+        @foreach (var item in ViewBag.personeller)
+        {
+            <option value="@item.Id" selected="@(item.Id==Model.PersonelId?"selected":null)">@item.AdSoyad</option>
+        }
+    </select>
+
+
+    <br /><label>İzne başlama tarihi</label>
+    <input type="date" asp-for="@Model.BaslamaTarihi" class="form-control" placeholder="">
+    <label>İzin bitiş tarihi</label>
+    <input type="date" asp-for="@Model.BitisTarihi" class="form-control" placeholder="">
+    <label>Adres:</label>
+    <input type="text" asp-for="@Model.Adres" class="form-control" placeholder="">
+    <button type="submit" class="btn btn-primary">ekle</button>
+
+
+</form>
+
+
+kalan izin süresi = <p>@ViewBag.kalanizin</p>
+kullanılan toplam izin süresi = <p>@ViewBag.kullanilanizin</p>
+
+@section scripts{<script>
+    $("#PersonelId").change(function () {
+
+        var perid = $(this).children("option:selected").val();
+        // console.log(depid);
+        window.location = "Form?perid= " + perid;
+    })
+
+
+</script>}
